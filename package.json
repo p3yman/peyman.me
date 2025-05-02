@@ -13,6 +13,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "private": true,
   "workspaces": [
     "website",
     "server",
