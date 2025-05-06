@@ -19,7 +19,7 @@ I've heard this from people who take my [mentoring sessions](/mentoring) and I'v
 
 ## Why Does This Happen?
 
-This doesn't usually come from bad intentions. Teams often start with a clear mission and energy, but as projects scale, or they fail a couple of times, hierarchies solidify, and suddenly fewer people are making the real decisions. You can suggest ideas in meetings, passionately argue for changes, but eventually realize decisions are already made. Your role, frustratingly, feels reduced to simply executing tasks someone else handed down.
+This doesn't usually come from bad intentions. Teams often start with a clear mission and energy, but as projects scale, or they fail a couple of times, hierarchies solidify, and suddenly fewer people are making the real decisions. Managers think they need to take over without actually understanding what is the problem. They don't see they are losing people and not projects. What's next? You can suggest ideas in meetings, passionately argue for changes, but eventually realize decisions are already made. Your role, frustratingly, feels reduced to simply executing tasks someone else handed down.
 
 ## From Passionate to Powerless
 
@@ -65,7 +65,7 @@ Great leaders don't just delegate tasks, they empower their teams. What you can 
 
 If you're feeling this way, it's important to realize your feelings are valid and common. While ideally, your managers should recognize and fix these issues, you don’t have to stay stuck as an NPC. Here's what I think you can do to start reclaiming your impact:
 
-- Speak Up Clearly: Be direct about wanting more involvement. Sometimes managers aren’t aware they're sidelining people.
+- Speak Up Clearly: Try to understand why decisions aren't coming from collaborations. Be direct about wanting more involvement. Sometimes managers aren’t aware they're sidelining people.
 
 - Focus on Influence, Not Just Tasks: Try to get involved in discussions earlier in the process. Ask questions about why decisions are made, even if you're not directly invited.
 
