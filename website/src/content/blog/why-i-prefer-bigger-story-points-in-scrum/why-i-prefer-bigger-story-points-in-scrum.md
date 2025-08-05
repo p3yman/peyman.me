@@ -1,7 +1,7 @@
 ---
 id: Hb2oVkRVZlHOkls5
 title: Why I prefer bigger story points in Scrum
-description: A short description
+description: Why larger story points in Scrum lead to better discussions, clearer requirements, and more effective sprint planning through forced clarity and intentional breakdown.
 date: 2025-08-02
 tags: sample-tag
 category: ["Product", "Project"]
