@@ -1,7 +1,7 @@
 ---
 id: qybRmpSCZg4OncZc
 title: Who says we don't watch TV anymore?
-description: A short description
+description: Why social media stories and on-demand streaming are just modern TV watching in disguise, and how we still consume content in the same channel-surfing patterns.
 date: 2023-09-23
 tags: sample-tag
 cover:

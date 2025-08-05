@@ -1,7 +1,7 @@
 ---
 id: po7WRlnTGn6XmJGb
 title: Age of Capable but Not Suitable Software
-description: A short description
+description: Why impressive technical capabilities don't always translate to useful software, and how companies prioritize growth over genuine user needs in today's tech landscape.
 date: 2025-05-12
 tags: sample-tag
 category: ["Product"]

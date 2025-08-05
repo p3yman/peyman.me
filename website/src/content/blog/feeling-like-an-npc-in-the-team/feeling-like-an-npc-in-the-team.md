@@ -1,7 +1,7 @@
 ---
 id: CAJ4PtsaQwnZk3Xi
 title: Feeling like an NPC in the team
-description: A short description
+description: How to recognize when you're becoming a powerless background character at work, why it happens, and practical steps to reclaim your impact and career satisfaction.
 date: 2025-05-02
 tags: sample-tag
 category: ["Dev", "Career"]
