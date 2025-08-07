@@ -15,11 +15,11 @@ tags:
     tailwind,
   ]
 category: ["Dev", "Tips"]
+cover:
+  img: ./github-example.webp
 ---
 
 When working with documentation or technical blogs, you might notice special markdown sections labeled as "Note," "Warning," or "Tip." GitHub officially calls these sections "[Alerts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts)", but you might have heard them referred to as "Admonitions" elsewhere.
-
-![GitHub's example of the alerts](./github-example.webp)
 
 Alerts are useful for emphasizing key information, pointing out warnings, or providing quick tips to your readers. In this post, I'll guide you through setting up GitHub Alerts in your Astro project and explain how to style them effectively.
 
