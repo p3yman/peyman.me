@@ -2,7 +2,7 @@
 id: usQ9hdmrEQTQHXyO
 title: Adding GitHub Alerts to Astro Markdown
 description: Learn how to add GitHub-style alerts (Note, Warning, Tip, etc.) to your Astro markdown content using remark-github-blockquote-alert with styling examples
-date: 2025-08-03
+date: 2025-08-07
 tags:
   [
     astro,
