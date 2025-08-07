@@ -59,6 +59,7 @@ npm run lint --workspace=cms
 - **Components**: Astro components in `/website/src/components/`
 - **Layouts**: Base layouts in `/website/src/layouts/`
 - **Configuration**: Categories defined in `/website/src/configs/categories.js`
+- **Markdown Processing**: GitHub-style alerts supported via `remark-github-blockquote-alert`
 
 ### CMS (React)
 - **Framework**: React 18 with TypeScript
