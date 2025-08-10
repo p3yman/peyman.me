@@ -8,7 +8,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://peyman.me",
   integrations: [robotsTxt(), sitemap()],
-  outDir: "../dist",
+  outDir: "./dist",
   markdown: {
     remarkPlugins: [remarkAlert],
   },
