@@ -4,37 +4,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Structure
 
-This is a monorepo with 3 main workspaces:
+This is an Astro-based blog and personal website project with the following structure:
 
-- `website/` - Astro-based blog and personal website (main project)
-- `cms/` - React/Vite content management interface
-- `server/` - Currently empty workspace for future backend
+- Root directory contains the main Astro project
+- `/src/` - Source code including components, pages, and content
+- `/public/` - Static assets
+- `/scripts/` - Utility scripts for content management
 
 ## Common Commands
 
 ### Development
 
 ```bash
-# Run the main website in development mode
-npm run website
+# Run the website in development mode
+npm run dev
 # or
-pnpm website
+npm start
 
-# Run the CMS interface
-npm run cms
-
-# Run specific workspace commands
-npm run dev --workspace=website
-npm run dev --workspace=cms
+# Serves the website at http://localhost:4321
 ```
 
 ### Building
 
 ```bash
-# Build the main website for production
+# Build the website for production
 npm run build
 # Outputs to /dist directory (configured in astro.config.mjs)
-# DO NOT BUILD to test features. The website will be served http://localhost:4321 for testing if needed
+# DO NOT BUILD to test features. Use 'npm run dev' for development testing
 ```
 
 ### Content Management
@@ -46,35 +42,26 @@ npm run add-page
 pnpm add-page
 ```
 
-This CLI tool prompts for title and categories, then creates a markdown file in `/website/src/content/blog/` with the correct frontmatter structure.
+This CLI tool prompts for title and categories, then creates a markdown file in `/src/content/blog/` with the correct frontmatter structure.
 
 ### Linting
 
 ```bash
-# Lint CMS code
-npm run lint --workspace=cms
+# Currently no linting setup - can be added if needed
 ```
 
 ## Architecture
 
-### Website (Astro)
+### Main Project (Astro)
 
 - **Framework**: Astro 5.x with TypeScript
 - **Styling**: TailwindCSS with typography plugin
-- **Content**: File-based blog posts in `/website/src/content/blog/`
-- **Content Schema**: Defined in `/website/src/content/config.ts` using Zod
-- **Components**: Astro components in `/website/src/components/`
-- **Layouts**: Base layouts in `/website/src/layouts/`
-- **Configuration**: Categories defined in `/website/src/configs/categories.js`
+- **Content**: File-based blog posts in `/src/content/blog/`
+- **Content Schema**: Defined in `/src/content/config.ts` using Zod
+- **Components**: Astro components in `/src/components/`
+- **Layouts**: Base layouts in `/src/layouts/`
+- **Configuration**: Categories defined in `/src/configs/categories.js`
 - **Markdown Processing**: GitHub-style alerts supported via `remark-github-blockquote-alert`
-
-### CMS (React)
-
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **UI Library**: Radix UI components with TailwindCSS
-- **Data Tables**: TanStack Table
-- **Routing**: React Router DOM
 
 ### Content Structure
 
@@ -94,7 +81,7 @@ cover:
 ---
 ```
 
-Available categories are defined in `/website/src/configs/categories.js`.
+Available categories are defined in `/src/configs/categories.js`.
 
 ### Deployment
 
@@ -113,8 +100,8 @@ When creating new blog posts:
 
 ## Key Files to Understand
 
-- `/website/src/content/config.ts` - Content collection schema
-- `/website/src/configs/categories.js` - Available blog categories
-- `/website/scripts/add-page.js` - Blog post creation CLI
-- `/website/astro.config.mjs` - Astro configuration
+- `/src/content/config.ts` - Content collection schema
+- `/src/configs/categories.js` - Available blog categories  
+- `/scripts/add-page.js` - Blog post creation CLI
+- `/astro.config.mjs` - Astro configuration
 - `/vercel.json` - Deployment and redirect configuration
