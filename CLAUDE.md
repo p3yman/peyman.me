@@ -5,13 +5,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Structure
 
 This is a monorepo with 3 main workspaces:
+
 - `website/` - Astro-based blog and personal website (main project)
-- `cms/` - React/Vite content management interface  
+- `cms/` - React/Vite content management interface
 - `server/` - Currently empty workspace for future backend
 
 ## Common Commands
 
 ### Development
+
 ```bash
 # Run the main website in development mode
 npm run website
@@ -27,13 +29,16 @@ npm run dev --workspace=cms
 ```
 
 ### Building
+
 ```bash
 # Build the main website for production
 npm run build
 # Outputs to /dist directory (configured in astro.config.mjs)
+# DO NOT BUILD to test features. The website will be served http://localhost:4321 for testing if needed
 ```
 
 ### Content Management
+
 ```bash
 # Create new blog posts interactively
 npm run add-page
@@ -44,6 +49,7 @@ pnpm add-page
 This CLI tool prompts for title and categories, then creates a markdown file in `/website/src/content/blog/` with the correct frontmatter structure.
 
 ### Linting
+
 ```bash
 # Lint CMS code
 npm run lint --workspace=cms
@@ -52,6 +58,7 @@ npm run lint --workspace=cms
 ## Architecture
 
 ### Website (Astro)
+
 - **Framework**: Astro 5.x with TypeScript
 - **Styling**: TailwindCSS with typography plugin
 - **Content**: File-based blog posts in `/website/src/content/blog/`
@@ -62,6 +69,7 @@ npm run lint --workspace=cms
 - **Markdown Processing**: GitHub-style alerts supported via `remark-github-blockquote-alert`
 
 ### CMS (React)
+
 - **Framework**: React 18 with TypeScript
 - **Build Tool**: Vite
 - **UI Library**: Radix UI components with TailwindCSS
@@ -69,7 +77,9 @@ npm run lint --workspace=cms
 - **Routing**: React Router DOM
 
 ### Content Structure
+
 Blog posts follow this frontmatter schema:
+
 ```yaml
 ---
 id: "unique-nanoid-16-chars"
@@ -87,6 +97,7 @@ cover:
 Available categories are defined in `/website/src/configs/categories.js`.
 
 ### Deployment
+
 - **Platform**: Vercel
 - **Build Output**: `/dist` directory
 - **Redirects**: Configured in `/vercel.json` for URL shortening
@@ -94,6 +105,7 @@ Available categories are defined in `/website/src/configs/categories.js`.
 ## Content Guidelines
 
 When creating new blog posts:
+
 1. Use the `npm run add-page` CLI tool for consistent structure
 2. Always add a `cover.jpg` file - it's required for the build
 3. Use the predefined categories from the categories config
@@ -102,7 +114,7 @@ When creating new blog posts:
 ## Key Files to Understand
 
 - `/website/src/content/config.ts` - Content collection schema
-- `/website/src/configs/categories.js` - Available blog categories  
+- `/website/src/configs/categories.js` - Available blog categories
 - `/website/scripts/add-page.js` - Blog post creation CLI
 - `/website/astro.config.mjs` - Astro configuration
 - `/vercel.json` - Deployment and redirect configuration

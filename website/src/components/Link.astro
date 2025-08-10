@@ -1,9 +1,9 @@
 ---
 import { tv } from "tailwind-variants";
 const { to, variant = "primary", size = "md", target = "self" } = Astro.props;
-console.log(Astro.props);
+
 const link = tv({
-  base: "border border-primary rounded-sm text-primary px-4 py-2 font-mono text-sm font-bold uppercase no-underline transition-colors whitespace-nowrap",
+  base: "border border-primary rounded-xs text-primary px-4 py-2 font-mono text-sm font-bold uppercase no-underline transition-colors whitespace-nowrap",
   variants: {
     variant: {
       primary: "bg-primary text-white border-primary",

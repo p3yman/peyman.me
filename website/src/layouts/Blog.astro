@@ -29,10 +29,10 @@ const formattedDate = dayjs(date).format("MMMM DD, YYYY");
       {title}
     </h1>
     <div class="font-mono text-sm text-gray-light flex space-x-2 items-center">
-      <div class="flex gap-1 mr-1">
+      <div class="flex gap-1 mr-3">
         {
           category.map((cat: string) => (
-            <span class="px-2 py-1 rounded bg-gray-lighter text-gray-dark">
+            <span class="px-2 py-1 rounded-sm bg-gray-lighter text-gray-dark">
               {cat}
             </span>
           ))
