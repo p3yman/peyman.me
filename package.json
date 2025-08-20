@@ -16,7 +16,7 @@
     "@fontsource/merriweather": "^5.2.9",
     "@fontsource/ubuntu-mono": "^5.2.6",
     "@tailwindcss/vite": "^4.1.11",
-    "astro": "^5.12.9",
+    "astro": "^5.13.1",
     "astro-google-analytics": "^1.0.3",
     "astro-robots-txt": "^1.0.0",
     "clsx": "^2.1.1",
