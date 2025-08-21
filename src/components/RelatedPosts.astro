@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import BlogPostItem from "./BlogPostItem.astro";
+
+export interface Props {
+  currentPostId: string;
+  currentCategory: string[];
+  limit?: number;
+}
+
+const { currentPostId, currentCategory, limit = 3 } = Astro.props;
+
+// Get all blog posts
+const allPosts = (await getCollection("blog"))
+  .filter((post) => {
+    const id = post.id.split("/").pop();
+    return id !== currentPostId;
+  })
+  .map((post) => {
+    const id = post.id.split("/").pop();
+    return {
+      ...post,
+      id,
+      slug: id,
+    };
+  });
+
+// Find related posts by category overlap
+const relatedPosts = allPosts
+  .map((post) => {
+    const categoryOverlap = post.data.category.filter((cat) =>
+      currentCategory.includes(cat)
+    ).length;
+    return {
+      ...post,
+      relevanceScore: categoryOverlap,
+    };
+  })
+  .filter((post) => post.relevanceScore > 0)
+  .sort((a, b) => {
+    // Sort by relevance score first, then by date
+    if (b.relevanceScore !== a.relevanceScore) {
+      return b.relevanceScore - a.relevanceScore;
+    }
+    return b.data.date.valueOf() - a.data.date.valueOf();
+  })
+  .slice(0, limit);
+
+// If we don't have enough related posts, fill with latest posts
+if (relatedPosts.length < limit) {
+  const additionalPosts = allPosts
+    .filter((post) => !relatedPosts.some((related) => related.id === post.id))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, limit - relatedPosts.length)
+    .map(post => ({
+      ...post,
+      relevanceScore: 0
+    }));
+
+  relatedPosts.push(...additionalPosts);
+}
+---
+
+{
+  relatedPosts.length > 0 && (
+    <section class="mt-16 pt-12 border-t border-gray-lighter border-dashed">
+      <h2 class="text-2xl font-serif font-bold text-gray-dark mb-8">
+        You might also like:
+      </h2>
+      <div class="space-y-6">
+        {relatedPosts.map((post) => (
+          <BlogPostItem
+            url={`/blog/${post.slug}`}
+            title={post.data.title}
+            date={post.data.date}
+          />
+        ))}
+      </div>
+    </section>
+  )
+}

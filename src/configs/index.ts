@@ -1,3 +1,3 @@
-export const SITE_TITLE = "Peyman Eskandari | Front-End Developer";
+export const SITE_TITLE = "Peyman Eskandari | Senior Front-End Developer";
 export const SITE_DESCRIPTION =
-  "A front-end <developer /> focused on building products that are beautiful from the inside out.";
+  "Senior Front-End Developer with a Product Mindset. Building powerful products using JavaScript (React, Astro, Vue), CSS (Sass), PHP (Laravel and WordPress), and Golang.";

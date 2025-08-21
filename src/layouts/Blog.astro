@@ -2,22 +2,35 @@
 import { Image } from "astro:assets";
 import dayjs from "dayjs";
 import DefaultLayout from "./Default.astro";
+import StructuredData from "../components/StructuredData.astro";
+import RelatedPosts from "../components/RelatedPosts.astro";
 import { readingTime } from "../utils/readingTime";
 import { SITE_TITLE } from "../configs";
-const { title, date, cover, description, body, category } = Astro.props;
+
+const { title, date, cover, description, body, category, id } = Astro.props;
 const formattedDate = dayjs(date).format("MMMM DD, YYYY");
+const isoDate = dayjs(date).toISOString();
 ---
 
-<DefaultLayout title={title} description={description}>
+<DefaultLayout 
+  title={title} 
+  description={description}
+  image={cover?.img?.src}
+  type="article"
+>
   <Fragment slot="head">
-    <title>{title} | {SITE_TITLE}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:site_name" content={SITE_TITLE} />
-    <meta property="og:url" content={Astro.url.href} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="article" />
-    <meta property="og:image" content={cover?.img?.src ?? "/seo-image.png"} />
+    <StructuredData 
+      type="article" 
+      data={{
+        title,
+        description,
+        datePublished: isoDate,
+        dateModified: isoDate,
+        image: cover?.img?.src,
+        category,
+        url: Astro.url.href
+      }}
+    />
   </Fragment>
   <header class="mb-8">
     <div class="mb-8">
