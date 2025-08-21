@@ -1,0 +1,121 @@
+---
+export interface Props {
+  type: 'person' | 'article' | 'website' | 'breadcrumb';
+  data?: any;
+}
+
+const { type, data = {} } = Astro.props;
+
+let structuredData = {};
+
+if (type === 'person') {
+  structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Peyman Eskandari",
+    "jobTitle": "Senior Front-End Developer",
+    "description": "Senior Front-End Developer with a Product Mindset. I am a Software Engineer with industry experience building websites and large-scale web applications.",
+    "url": "https://peyman.me",
+    "sameAs": [
+      "https://github.com/p3yman",
+      "https://linkedin.com/in/p3yman",
+      "https://twitter.com/p3yman"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Independent"
+    },
+    "knowsAbout": [
+      "JavaScript",
+      "React",
+      "Astro",
+      "Vue.js",
+      "CSS",
+      "Sass",
+      "PHP",
+      "Laravel",
+      "WordPress",
+      "Golang",
+      "Front-End Development",
+      "Web Development"
+    ],
+    "email": "salam@peyman.me",
+    ...data
+  };
+} else if (type === 'article') {
+  const {
+    title,
+    description,
+    datePublished,
+    dateModified,
+    image,
+    category = [],
+    url
+  } = data;
+  
+  structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": title,
+    "description": description,
+    "author": {
+      "@type": "Person",
+      "name": "Peyman Eskandari",
+      "url": "https://peyman.me"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Peyman Eskandari",
+      "url": "https://peyman.me"
+    },
+    "datePublished": datePublished,
+    "dateModified": dateModified || datePublished,
+    "url": url,
+    "image": image ? {
+      "@type": "ImageObject",
+      "url": new URL(image, Astro.site).href,
+      "width": 1200,
+      "height": 630
+    } : undefined,
+    "keywords": category.join(', '),
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    }
+  };
+} else if (type === 'website') {
+  structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Peyman Eskandari | Front-End Developer",
+    "description": "A front-end developer focused on building products that are beautiful from the inside out.",
+    "url": "https://peyman.me",
+    "author": {
+      "@type": "Person",
+      "name": "Peyman Eskandari"
+    },
+    "inLanguage": "en-US",
+    "copyrightYear": new Date().getFullYear(),
+    "copyrightHolder": {
+      "@type": "Person",
+      "name": "Peyman Eskandari"
+    },
+    ...data
+  };
+} else if (type === 'breadcrumb') {
+  const { items = [] } = data;
+  
+  structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item: any, index: number) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url
+    }))
+  };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

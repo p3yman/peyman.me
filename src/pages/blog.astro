@@ -16,7 +16,10 @@ const posts = (await getCollection("blog"))
   });
 ---
 
-<DefaultLayout title={title}>
+<DefaultLayout 
+  title={title}
+  description="Senior Front-End Developer sharing insights on software development, product mindset, and building powerful web applications. Articles about JavaScript, React, Astro, Vue, PHP, and more."
+>
   <h1 class="font-serif text-6xl font-bold pb-12">Blog.</h1>
   {
     posts.map((post) => (
