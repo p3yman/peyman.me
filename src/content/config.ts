@@ -21,4 +21,14 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const wordOfTheDay = defineCollection({
+  loader: glob({ pattern: "words.json", base: "./src/content/word-of-the-day" }),
+  schema: z.record(z.string(), z.object({
+    word: z.string(),
+    pronunciation: z.string(),
+    meaning: z.string(),
+    context: z.string().optional(),
+  })),
+});
+
+export const collections = { blog, wordOfTheDay };

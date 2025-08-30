@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import WordCard from "../../components/WordCard.astro";
+import Default from "../../layouts/Default.astro";
+
+export async function getStaticPaths() {
+  const wordCollection = await getCollection("wordOfTheDay");
+  const wordsData = wordCollection[0]?.data || {};
+
+  return Object.keys(wordsData).map((date) => ({
+    params: { date },
+    props: {
+      word: wordsData[date],
+      date,
+      allDates: Object.keys(wordsData).sort(),
+    },
+  }));
+}
+
+const { date } = Astro.params;
+const { word, allDates } = Astro.props;
+
+// Validate date exists and is not in the future
+const today = new (globalThis.Date as DateConstructor)()
+  .toISOString()
+  .split("T")[0];
+if (!word) {
+  throw new Error(`No word found for date: ${date}`);
+}
+
+if (date > today) {
+  throw new Error(`Word for ${date} is not yet available`);
+}
+
+// Find previous and next available dates
+const currentIndex = allDates.indexOf(date);
+const prevDate = currentIndex > 0 ? allDates[currentIndex - 1] : undefined;
+const nextDate =
+  currentIndex < allDates.length - 1 && allDates[currentIndex + 1] <= today
+    ? allDates[currentIndex + 1]
+    : undefined;
+---
+
+<Default
+  title={`Word of the Day: ${word.word}`}
+  description={`${word.word} - ${word.meaning}`}
+>
+  <WordCard
+    word={word.word}
+    pronunciation={word.pronunciation}
+    meaning={word.meaning}
+    context={word.context}
+    date={date}
+    prevDate={prevDate}
+    nextDate={nextDate}
+  />
+</Default>
