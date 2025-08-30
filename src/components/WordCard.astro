@@ -1,0 +1,97 @@
+---
+import ArrowLeft from "./icons/ArrowLeft.astro";
+import ArrowRight from "./icons/ArrowRight.astro";
+import { clsx } from "clsx";
+
+export interface Props {
+  word: string;
+  pronunciation: string;
+  meaning: string;
+  context?: string;
+  date: string;
+  prevDate?: string;
+  nextDate?: string;
+}
+
+const { word, pronunciation, meaning, date, prevDate, nextDate } =
+  Astro.props;
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+---
+
+<div class="flex items-center justify-center py-40">
+  <div class="max-w-2xl w-full">
+    <div class="text-center">
+      <p class="text-gray-400 text-sm font-light tracking-wider uppercase mb-2">
+        Word of the Day
+      </p>
+      <h1 class="text-gray-600 text-lg font-light">{formatDate(date)}</h1>
+    </div>
+
+    <hr class="my-8 border-gray-lighter" />
+
+    <div class="px-8 py-20 my-8">
+      <div class="flex flex-col justify-center items-center">
+        <h2
+          class="text-6xl md:text-7xl font-serif font-light text-gray-dark tracking-tight leading-none mb-6"
+        >
+          {word}
+        </h2>
+
+        <div>
+          <p class="text-gray-light text-xl font-light tracking-wide">
+            {pronunciation}
+          </p>
+        </div>
+
+        <div class="max-w-lg mx-auto mt-12">
+          <p class="text-gray text-lg leading-relaxed font-light">
+            "{meaning}"
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-8 border-gray-lighter" />
+
+    <div class="flex justify-between items-center">
+      <a
+        href={prevDate ? `/word-of-the-day/${prevDate}` : undefined}
+        class={clsx(
+          "flex items-center space-x-2 transition-colors duration-300",
+          prevDate
+            ? "group text-gray-dark hover:text-primary"
+            : "text-gray-light cursor-default"
+        )}
+      >
+        <ArrowLeft
+          class={clsx("size-4", prevDate && "transition-colors duration-300")}
+        />
+        <span class={"font-mono uppercase"}> Previous </span>
+      </a>
+
+      <a
+        href={nextDate ? `/word-of-the-day/${nextDate}` : undefined}
+        class={clsx(
+          "flex items-center space-x-2 transition-colors duration-300 group",
+          nextDate
+            ? "text-gray-dark hover:text-primary"
+            : "text-gray-light cursor-default"
+        )}
+      >
+        <span class={"font-mono uppercase"}> Next </span>
+        <ArrowRight
+          class={clsx("size-4", nextDate && "transition-colors duration-300")}
+        />
+      </a>
+    </div>
+  </div>
+</div>

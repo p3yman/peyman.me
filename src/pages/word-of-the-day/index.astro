@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+
+// Get all words and find the closest one to today
+const wordCollection = await getCollection("wordOfTheDay");
+const wordsData = wordCollection[0]?.data || {};
+
+const today = new Date().toISOString().split("T")[0];
+const availableDates = Object.keys(wordsData).sort();
+
+// Find the closest word to today (today's word or most recent past word)
+let targetDate = today;
+const todayOrBefore = availableDates.filter((date) => date <= today);
+if (todayOrBefore.length > 0) {
+  targetDate = todayOrBefore[todayOrBefore.length - 1];
+} else {
+  // If no words for today or before, redirect to earliest available
+  targetDate = availableDates[0];
+}
+
+// Redirect to the target date
+return Astro.redirect(`/word-of-the-day/${targetDate}`);
+---
+
