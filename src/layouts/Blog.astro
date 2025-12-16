@@ -12,15 +12,15 @@ const formattedDate = dayjs(date).format("MMMM DD, YYYY");
 const isoDate = dayjs(date).toISOString();
 ---
 
-<DefaultLayout 
-  title={title} 
+<DefaultLayout
+  title={title}
   description={description}
   image={cover?.img?.src}
   type="article"
 >
   <Fragment slot="head">
-    <StructuredData 
-      type="article" 
+    <StructuredData
+      type="article"
       data={{
         title,
         description,
@@ -28,15 +28,13 @@ const isoDate = dayjs(date).toISOString();
         dateModified: isoDate,
         image: cover?.img?.src,
         category,
-        url: Astro.url.href
+        url: Astro.url.href,
       }}
     />
   </Fragment>
   <header class="blog-header">
     <div class="back-link">
-      <a href="/blog" class="back-button">
-        ← Back to blog
-      </a>
+      <a href="/blog" class="back-button"> ← Back to blog </a>
     </div>
     <h1 class="blog-title">
       {title}
@@ -45,9 +43,7 @@ const isoDate = dayjs(date).toISOString();
       <div class="categories">
         {
           category.map((cat: string) => (
-            <span class="category-badge">
-              {cat}
-            </span>
+            <span class="category-badge">{cat}</span>
           ))
         }
       </div>
@@ -64,16 +60,14 @@ const isoDate = dayjs(date).toISOString();
           alt={title}
           width={720}
           height={480}
-          class={cover.credit ? "cover-img-with-credit" : "cover-img"}
+          class={
+            cover.credit ? "cover cover-img-with-credit" : "cover cover-img"
+          }
         />
         {cover.credit && (
           <div class="cover-credit">
             Photo by{" "}
-            <a
-              href={cover.url}
-              class="credit-link"
-              target="_blank"
-            >
+            <a href={cover.url} class="credit-link" target="_blank">
               {cover.credit}
             </a>
           </div>
@@ -134,6 +128,11 @@ const isoDate = dayjs(date).toISOString();
     border-radius: var(--radius-sm);
     background-color: var(--color-gray-lighter);
     color: var(--color-gray-dark);
+  }
+
+  .cover {
+    width: 100%;
+    height: auto;
   }
 
   .cover-img {
