@@ -1,9 +1,9 @@
-@import 'tailwindcss';
+@import "./reset.css";
+@import "./typography.css";
 
-@plugin '@tailwindcss/typography';
-
-@theme {
-  --color-*: initial;
+/* CSS Custom Properties */
+:root {
+  /* Colors */
   --color-primary: #1755f6;
   --color-secondary: #444452;
 
@@ -15,32 +15,76 @@
   --color-black: #000000;
   --color-white: #ffffff;
 
+  /* Fonts */
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif:
-    Merriweather, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+    Merriweather, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono:
-    Ubuntu Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+    "Ubuntu Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-section: 10rem;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-display-sm: 3rem;
+  --text-display: 3.75rem;
+  --text-display-lg: 4.5rem;
+
+  /* Line heights */
+  --leading-none: 1;
+  --leading-snug: 1.375;
+  --leading-relaxed: 1.625;
+
+  /* Border radius */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+
+  /* Transitions */
+  --transition-colors: color 150ms ease, background-color 150ms ease;
+  --transition-all: all 300ms ease;
 }
 
-@utility container {
+/* Base styles */
+body {
+  font-family: var(--font-sans);
+}
+
+/* Container for consistent horizontal padding and centering */
+.container {
   margin-inline: auto;
   padding-inline: 1rem;
-  @media (width >= --theme(--breakpoint-sm)) {
+}
+
+@media (min-width: 640px) {
+  .container {
     max-width: none;
   }
-  @media (width >= 752px) {
+}
+
+@media (min-width: 752px) {
+  .container {
     max-width: 752px;
   }
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
