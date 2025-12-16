@@ -3,28 +3,46 @@ import { Image } from "astro:assets";
 import logo from "../assets/images/logo.svg";
 ---
 
-<header class="pt-12 pb-24 flex justify-between">
+<header>
   <a aria-current="page" href="/">
-    <Image src={logo} alt="Peyman Eskandari" class="w-10" />
+    <Image src={logo} alt="Peyman Eskandari" />
   </a>
-  <nav class="flex justify-between space-x-6">
-    <a
-      class="font-mono uppercase text-secondary hover:text-primary"
-      href="/blog"
-    >
+  <nav>
+    <a href="/blog">
       <span data-hover="Blog">Blog</span>
     </a>
-    <a
-      class="font-mono uppercase text-secondary hover:text-primary"
-      href="/mentoring"
-    >
+    <a href="/mentoring">
       <span data-hover="Mentoring">Mentoring</span>
     </a>
-    <a
-      class="font-mono uppercase text-secondary hover:text-primary"
-      href="mailto:peyman.eskandari@gmail.com"
-    >
+    <a href="mailto:peyman.eskandari@gmail.com">
       <span data-hover="Contact">Contact</span>
     </a>
   </nav>
 </header>
+
+<style>
+  header {
+    padding-top: 48px;
+    padding-bottom: 96px;
+    display: flex;
+    justify-content: space-between;
+  }
+  header a img {
+    width: 40px;
+    height: 40px;
+  }
+  header nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  header nav a {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    text-decoration: none;
+  }
+  header nav a:hover {
+    color: var(--color-primary);
+  }
+</style>

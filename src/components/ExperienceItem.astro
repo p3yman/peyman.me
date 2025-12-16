@@ -2,10 +2,36 @@
 const { item } = Astro.props;
 ---
 
-<div class="w-full">
-  <header class="flex justify-between items-center">
-    <div class="font-bold">{item.title}</div>
-    <div class="font-mono text-sm text-gray">{item.time}</div>
+<div class="experience-item">
+  <header class="experience-header">
+    <div class="title">{item.title}</div>
+    <div class="time">{item.time}</div>
   </header>
-  <div class="text-sm">{item.desc}</div>
+  <div class="description">{item.desc}</div>
 </div>
+
+<style>
+  .experience-item {
+    width: 100%;
+  }
+
+  .experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .title {
+    font-weight: 700;
+  }
+
+  .time {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-gray);
+  }
+
+  .description {
+    font-size: var(--text-sm);
+  }
+</style>
