@@ -10,21 +10,19 @@ import { skills } from "../configs/skills";
 import { works } from "../configs/works";
 ---
 
-<DefaultLayout 
+<DefaultLayout
   description="Senior Front-End Developer with a Product Mindset. I am a Software Engineer with industry experience building websites and large-scale web applications using JavaScript (React, Astro, Vue), CSS (Sass), PHP (Laravel and WordPress), and Golang."
 >
   <Fragment slot="head">
     <StructuredData type="person" />
   </Fragment>
-  <section class="pt-36 pb-64 border-b border-gray-lighter">
-    <h1
-      class="text-3xl font-serif mb-10 leading-relaxed font-light text-gray-dark"
-    >
-      Hi, I’m <b class="font-bold">Peyman</b>, a software <span
-        class="whitespace-nowrap">&lt;developer /&gt;</span
+  <section class="hero">
+    <h1 class="hero-title">
+      Hi, I'm <b>Peyman</b>, a software <span class="code-snippet"
+        >&lt;developer /&gt;</span
       > focused on building products that are beautiful from the inside out.
     </h1>
-    <div class="flex space-x-2">
+    <div class="hero-actions">
       <Link to="mailto:salam@peyman.me">Say hi</Link>
       <Link to="/Peyman-Eskandari-Resume-Sep-2023.pdf" variant="outline">
         Resume
@@ -35,31 +33,75 @@ import { works } from "../configs/works";
   <Section title="About">
     <p>
       I am a Software Engineer with industry experience building websites and
-      large-scale web applications. I’m passionate about creating powerful
+      large-scale web applications. I'm passionate about creating powerful
       products using JavaScript (React, Astro, Vue), CSS (Sass), PHP (Laravel
       and WordPress), and just a bit of Golang.
     </p>
   </Section>
 
   <Section title="Skills">
-    <div class="grid grid-cols-4 gap-4">
-      {
-        skills.map((item) => (
-          <span class="text-sm text-gray font-mono">{item}</span>
-        ))
-      }
+    <div class="skills-grid">
+      {skills.map((item) => <span class="skill-item">{item}</span>)}
     </div>
   </Section>
 
   <Section title="Experiences">
-    <div class="flex flex-col gap-8">
+    <div class="items-list">
       {experiences.map((item) => <ExperienceItem item={item} />)}
     </div>
   </Section>
 
   <Section title="Works">
-    <div class="flex flex-col gap-8">
+    <div class="items-list">
       {works.map((item) => <WorkItem item={item} />)}
     </div>
   </Section>
 </DefaultLayout>
+
+<style>
+  .hero {
+    padding-top: var(--space-section);
+    padding-bottom: 16rem;
+    border-bottom: 1px solid var(--color-gray-lighter);
+  }
+
+  .hero-title {
+    font-size: var(--text-3xl);
+    font-family: var(--font-serif);
+    margin-bottom: var(--space-xl);
+    line-height: var(--leading-relaxed);
+    font-weight: 300;
+    color: var(--color-gray-dark);
+  }
+
+  .hero-title b {
+    font-weight: 700;
+  }
+
+  .code-snippet {
+    white-space: nowrap;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+  }
+
+  .skill-item {
+    font-size: var(--text-sm);
+    color: var(--color-gray);
+    font-family: var(--font-mono);
+  }
+
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+</style>
