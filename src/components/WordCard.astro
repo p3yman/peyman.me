@@ -1,7 +1,6 @@
 ---
 import ArrowLeft from "./icons/ArrowLeft.astro";
 import ArrowRight from "./icons/ArrowRight.astro";
-import { clsx } from "clsx";
 
 export interface Props {
   word: string;
@@ -27,71 +26,180 @@ const formatDate = (dateStr: string) => {
 };
 ---
 
-<div class="flex items-center justify-center py-40">
-  <div class="max-w-2xl w-full">
-    <div class="text-center">
-      <p class="text-gray-400 text-sm font-light tracking-wider uppercase mb-2">
+<div class="word-card">
+  <div class="card-container">
+    <div class="card-header">
+      <p class="header-label">
         Word of the Day
       </p>
-      <h1 class="text-gray-600 text-lg font-light">{formatDate(date)}</h1>
+      <h1 class="header-date">{formatDate(date)}</h1>
     </div>
 
-    <hr class="my-8 border-gray-lighter" />
+    <hr class="divider" />
 
-    <div class="px-8 py-20 my-8">
-      <div class="flex flex-col justify-center items-center">
-        <h2
-          class="text-6xl md:text-7xl font-serif font-light text-gray-dark tracking-tight leading-none mb-6"
-        >
+    <div class="word-content">
+      <div class="content-inner">
+        <h2 class="word-title">
           {word}
         </h2>
 
         <div>
-          <p class="text-gray-light text-xl font-light tracking-wide">
+          <p class="pronunciation">
             {pronunciation}
           </p>
         </div>
 
-        <div class="max-w-lg mx-auto mt-12">
-          <p class="text-gray text-lg leading-relaxed font-light">
+        <div class="meaning-container">
+          <p class="meaning">
             "{meaning}"
           </p>
         </div>
       </div>
     </div>
 
-    <hr class="my-8 border-gray-lighter" />
+    <hr class="divider" />
 
-    <div class="flex justify-between items-center">
+    <div class="navigation">
       <a
         href={prevDate ? `/word-of-the-day/${prevDate}` : undefined}
-        class={clsx(
-          "flex items-center space-x-2 transition-colors duration-300",
-          prevDate
-            ? "group text-gray-dark hover:text-primary"
-            : "text-gray-light cursor-default"
-        )}
+        data-enabled={prevDate ? "true" : "false"}
+        class="nav-link"
       >
-        <ArrowLeft
-          class={clsx("size-4", prevDate && "transition-colors duration-300")}
-        />
-        <span class={"font-mono uppercase"}> Previous </span>
+        <ArrowLeft class="nav-icon" />
+        <span class="nav-label">Previous</span>
       </a>
 
       <a
         href={nextDate ? `/word-of-the-day/${nextDate}` : undefined}
-        class={clsx(
-          "flex items-center space-x-2 transition-colors duration-300 group",
-          nextDate
-            ? "text-gray-dark hover:text-primary"
-            : "text-gray-light cursor-default"
-        )}
+        data-enabled={nextDate ? "true" : "false"}
+        class="nav-link"
       >
-        <span class={"font-mono uppercase"}> Next </span>
-        <ArrowRight
-          class={clsx("size-4", nextDate && "transition-colors duration-300")}
-        />
+        <span class="nav-label">Next</span>
+        <ArrowRight class="nav-icon" />
       </a>
     </div>
   </div>
 </div>
+
+<style>
+  .word-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--space-section);
+  }
+
+  .card-container {
+    max-width: 42rem;
+    width: 100%;
+  }
+
+  .card-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .header-label {
+    text-transform: uppercase;
+    color: rgb(156, 163, 175);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .header-date {
+    color: rgb(75, 85, 99);
+    font-size: var(--text-lg);
+    font-weight: 300;
+  }
+
+  .divider {
+    margin-block: var(--space-xl);
+    border-color: var(--color-gray-lighter);
+  }
+
+  .word-content {
+    padding-inline: var(--space-xl);
+    padding-block: var(--space-4xl);
+    margin-block: var(--space-xl);
+  }
+
+  .content-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .word-title {
+    font-size: var(--text-display);
+    font-family: var(--font-serif);
+    font-weight: 300;
+    color: var(--color-gray-dark);
+    letter-spacing: -0.025em;
+    line-height: var(--leading-none);
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .word-title {
+      font-size: var(--text-display-lg);
+    }
+  }
+
+  .pronunciation {
+    color: var(--color-gray-light);
+    font-size: var(--text-xl);
+    font-weight: 300;
+    letter-spacing: 0.025em;
+  }
+
+  .meaning-container {
+    max-width: 32rem;
+    margin-inline: auto;
+    margin-top: var(--space-2xl);
+  }
+
+  .meaning {
+    color: var(--color-gray);
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    font-weight: 300;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    transition: var(--transition-all);
+    color: var(--color-gray-light);
+    cursor: default;
+    text-decoration: none;
+  }
+
+  .nav-link[data-enabled="true"] {
+    color: var(--color-gray-dark);
+    cursor: pointer;
+  }
+
+  .nav-link[data-enabled="true"]:hover {
+    color: var(--color-primary);
+  }
+
+  .nav-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .nav-label {
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+</style>

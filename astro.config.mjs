@@ -2,7 +2,6 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
 import { remarkAlert } from "remark-github-blockquote-alert";
-import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,8 +10,5 @@ export default defineConfig({
   outDir: "./dist",
   markdown: {
     remarkPlugins: [remarkAlert],
-  },
-  vite: {
-    plugins: [tailwindcss()],
   },
 });

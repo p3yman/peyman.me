@@ -4,12 +4,12 @@ import DefaultLayout from "../layouts/Default.astro";
 const title = "Mentoring";
 ---
 
-<DefaultLayout 
+<DefaultLayout
   title={title}
   description="Free mentoring sessions from a Senior Front-End Developer with Product Mindset. Get help with resume review, portfolio feedback, interview tips, and career guidance for software developers."
 >
-  <h1 class="font-serif text-6xl font-bold pb-12">Mentoring.</h1>
-  <div class="prose max-w-none">
+  <h1 class="page-title">Mentoring.</h1>
+  <div class="prose prose-full">
     <p>
       As you know, I'm a software developer with over a decade of experience in
       the tech industry. I've been lucky to work on some fantastic projects and
@@ -86,7 +86,7 @@ const title = "Mentoring";
       </li>
     </ul>
 
-    <div class="my-12 text-center">
+    <div class="booking-cta">
       <Link
         to="https://calendly.com/p3yman/mentoring"
         size="lg"
@@ -97,3 +97,21 @@ const title = "Mentoring";
     </div>
   </div>
 </DefaultLayout>
+
+<style>
+  .page-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-display);
+    font-weight: 700;
+    padding-bottom: var(--space-2xl);
+  }
+
+  .prose-full {
+    max-width: none;
+  }
+
+  .booking-cta {
+    text-align: center;
+    margin-block: var(--space-2xl);
+  }
+</style>

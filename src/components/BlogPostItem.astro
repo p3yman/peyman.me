@@ -4,14 +4,45 @@ const { title, url, date } = Astro.props;
 const formattedDate = dayjs(date).format("MMMM DD, YYYY");
 ---
 
-<div
-  class="flex items-start justify-between border-b border-gray-lighter py-6 last:border-b-0"
->
-  <a
-    class="text-secondary flex-1 font-serif text-xl font-bold leading-snug hover:text-primary"
-    href={url}
-  >
+<div class="blog-post-item">
+  <a class="post-title" href={url}>
     <h3>{title}</h3>
   </a>
-  <span class="text-sm text-gray-light font-mono pl-6">{formattedDate}</span>
+  <span class="post-date">{formattedDate}</span>
 </div>
+
+<style>
+  .blog-post-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-gray-lighter);
+    padding-block: var(--space-lg);
+  }
+
+  .blog-post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-title {
+    flex: 1 1 0%;
+    color: var(--color-secondary);
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    line-height: var(--leading-snug);
+    text-decoration: none;
+    transition: var(--transition-colors);
+  }
+
+  .post-title:hover {
+    color: var(--color-primary);
+  }
+
+  .post-date {
+    font-size: var(--text-sm);
+    color: var(--color-gray-light);
+    font-family: var(--font-mono);
+    padding-left: var(--space-lg);
+  }
+</style>

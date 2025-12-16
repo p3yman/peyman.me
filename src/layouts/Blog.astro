@@ -12,15 +12,15 @@ const formattedDate = dayjs(date).format("MMMM DD, YYYY");
 const isoDate = dayjs(date).toISOString();
 ---
 
-<DefaultLayout 
-  title={title} 
+<DefaultLayout
+  title={title}
   description={description}
   image={cover?.img?.src}
   type="article"
 >
   <Fragment slot="head">
-    <StructuredData 
-      type="article" 
+    <StructuredData
+      type="article"
       data={{
         title,
         description,
@@ -28,26 +28,22 @@ const isoDate = dayjs(date).toISOString();
         dateModified: isoDate,
         image: cover?.img?.src,
         category,
-        url: Astro.url.href
+        url: Astro.url.href,
       }}
     />
   </Fragment>
-  <header class="mb-8">
-    <div class="mb-8">
-      <a href="/blog" class="text-gray-light hover:text-gray-dark">
-        ← Back to blog
-      </a>
+  <header class="blog-header">
+    <div class="back-link">
+      <a href="/blog" class="back-button"> ← Back to blog </a>
     </div>
-    <h1 class="text-gray-dark text-5xl font-black leading-snug pb-6 font-serif">
+    <h1 class="blog-title">
       {title}
     </h1>
-    <div class="font-mono text-sm text-gray-light flex space-x-2 items-center">
-      <div class="flex gap-1 mr-3">
+    <div class="blog-meta">
+      <div class="categories">
         {
           category.map((cat: string) => (
-            <span class="px-2 py-1 rounded-sm bg-gray-lighter text-gray-dark">
-              {cat}
-            </span>
+            <span class="category-badge">{cat}</span>
           ))
         }
       </div>
@@ -64,24 +60,107 @@ const isoDate = dayjs(date).toISOString();
           alt={title}
           width={720}
           height={480}
-          class={cover.credit ? "mb-2" : "mb-8"}
+          class={
+            cover.credit ? "cover cover-img-with-credit" : "cover cover-img"
+          }
         />
         {cover.credit && (
-          <div class="text-center text-gray-light mb-8 text-sm">
+          <div class="cover-credit">
             Photo by{" "}
-            <a
-              href={cover.url}
-              class="underline hover:text-primary"
-              target="_blank"
-            >
+            <a href={cover.url} class="credit-link" target="_blank">
               {cover.credit}
             </a>
           </div>
         )}
       </>
     ) : (
-      <hr class="border-t border-t-gray-lighter mb-8" />
+      <hr class="divider" />
     )
   }
   <slot />
 </DefaultLayout>
+
+<style>
+  .blog-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .back-link {
+    margin-bottom: var(--space-xl);
+  }
+
+  .back-button {
+    color: var(--color-gray-light);
+    transition: var(--transition-colors);
+  }
+
+  .back-button:hover {
+    color: var(--color-gray-dark);
+  }
+
+  .blog-title {
+    color: var(--color-gray-dark);
+    font-size: var(--text-display-sm);
+    font-weight: 900;
+    line-height: var(--leading-snug);
+    padding-bottom: var(--space-lg);
+    font-family: var(--font-serif);
+  }
+
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-gray-light);
+    gap: var(--space-sm);
+  }
+
+  .categories {
+    display: flex;
+    gap: var(--space-xs);
+    margin-right: var(--space-sm);
+  }
+
+  .category-badge {
+    padding-inline: var(--space-sm);
+    padding-block: var(--space-xs);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-gray-lighter);
+    color: var(--color-gray-dark);
+  }
+
+  .cover {
+    width: 100%;
+    height: auto;
+  }
+
+  .cover-img {
+    margin-bottom: var(--space-xl);
+  }
+
+  .cover-img-with-credit {
+    margin-bottom: var(--space-sm);
+  }
+
+  .cover-credit {
+    text-align: center;
+    color: var(--color-gray-light);
+    margin-bottom: var(--space-xl);
+    font-size: var(--text-sm);
+  }
+
+  .credit-link {
+    text-decoration: underline;
+    transition: var(--transition-colors);
+  }
+
+  .credit-link:hover {
+    color: var(--color-primary);
+  }
+
+  .divider {
+    border-top: 1px solid var(--color-gray-lighter);
+    margin-bottom: var(--space-xl);
+  }
+</style>

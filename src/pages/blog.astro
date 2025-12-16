@@ -16,11 +16,11 @@ const posts = (await getCollection("blog"))
   });
 ---
 
-<DefaultLayout 
+<DefaultLayout
   title={title}
   description="Senior Front-End Developer sharing insights on software development, product mindset, and building powerful web applications. Articles about JavaScript, React, Astro, Vue, PHP, and more."
 >
-  <h1 class="font-serif text-6xl font-bold pb-12">Blog.</h1>
+  <h1 class="page-title">Blog.</h1>
   {
     posts.map((post) => (
       <BlogPostItem
@@ -31,3 +31,12 @@ const posts = (await getCollection("blog"))
     ))
   }
 </DefaultLayout>
+
+<style>
+  .page-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-display);
+    font-weight: 700;
+    padding-bottom: var(--space-2xl);
+  }
+</style>

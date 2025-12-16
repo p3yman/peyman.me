@@ -2,13 +2,46 @@
 const { title } = Astro.props;
 ---
 
-<section class="flex py-40">
-  <div
-    class="text-primary shrink-0 font-mono font-bold tracking-[4px] mr-16 text-right w-28 uppercase"
-  >
+<section class="section">
+  <div class="section-title">
     {title}
   </div>
-  <div class="w-full">
+  <div class="section-content">
     <slot />
   </div>
 </section>
+
+<style>
+  .section {
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--space-section);
+  }
+
+  .section-title {
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-content {
+    width: 100%;
+  }
+
+  @media (min-width: 752px) {
+    .section {
+      flex-direction: row;
+    }
+
+    .section-title {
+      flex-shrink: 0;
+      text-align: right;
+      margin-right: var(--space-3xl);
+      margin-bottom: 0;
+      width: 7rem;
+    }
+  }
+</style>

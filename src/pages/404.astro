@@ -19,44 +19,111 @@ import StructuredData from "../components/StructuredData.astro";
     />
   </Fragment>
 
-  <div class="py-32 text-center">
-    <div class="mb-8">
-      <h1 class="text-6xl font-black font-serif text-gray-dark mb-4">404</h1>
-      <h2 class="text-2xl font-serif text-gray-dark mb-6">Page Not Found</h2>
-      <p class="text-lg text-gray mb-8 max-w-md mx-auto">
+  <div class="error-page">
+    <div class="error-header">
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Page Not Found</h2>
+      <p class="error-message">
         Sorry, the page you're looking for doesn't exist. It might have been
         moved, deleted, or you entered the wrong URL.
       </p>
     </div>
 
-    <div class="flex justify-center gap-4">
+    <div class="error-actions">
       <Link to="/"> Back to Home </Link>
       <Link to="/blog" variant="outline"> Browse Blog </Link>
     </div>
 
-    <hr class="my-8 border-gray-lighter border-dashed" />
+    <hr class="error-divider" />
 
-    <div class="mt-12">
-      <h3 class="text-lg font-serif text-gray-dark mb-4">
+    <div class="suggested-links">
+      <h3 class="suggested-title">
         Maybe you are looking for one of these?
       </h3>
-      <ul class="space-y-2 text-gray">
+      <ul class="links-list">
         <li>
-          <a href="/blog" class="hover:text-gray-dark transition-colors">Blog</a
-          >
+          <a href="/blog" class="link-item">Blog</a>
         </li>
         <li>
-          <a href="/mentoring" class="hover:text-gray-dark transition-colors"
-            >Mentoring</a
-          >
+          <a href="/mentoring" class="link-item">Mentoring</a>
         </li>
         <li>
-          <a
-            href="mailto:salam@peyman.me"
-            class="hover:text-gray-dark transition-colors">Contact</a
-          >
+          <a href="mailto:salam@peyman.me" class="link-item">Contact</a>
         </li>
       </ul>
     </div>
   </div>
 </DefaultLayout>
+
+<style>
+  .error-page {
+    text-align: center;
+    padding-block: var(8rem);
+  }
+
+  .error-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .error-code {
+    font-size: var(--text-display);
+    font-weight: 900;
+    font-family: var(--font-serif);
+    color: var(--color-gray-dark);
+    margin-bottom: var(--space-md);
+  }
+
+  .error-title {
+    font-size: var(--text-2xl);
+    font-family: var(--font-serif);
+    color: var(--color-gray-dark);
+    margin-bottom: var(--space-lg);
+  }
+
+  .error-message {
+    max-width: 28rem;
+    font-size: var(--text-lg);
+    color: var(--color-gray);
+    margin-bottom: var(--space-xl);
+    margin-inline: auto;
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+  }
+
+  .error-divider {
+    margin-block: var(--space-xl);
+    border-color: var(--color-gray-lighter);
+    border-style: dashed;
+    border-width: 1px 0 0 0;
+  }
+
+  .suggested-links {
+    margin-top: var(--space-2xl);
+  }
+
+  .suggested-title {
+    font-size: var(--text-lg);
+    font-family: var(--font-serif);
+    color: var(--color-gray-dark);
+    margin-bottom: var(--space-md);
+  }
+
+  .links-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    color: var(--color-gray);
+  }
+
+  .link-item {
+    transition: var(--transition-colors);
+  }
+
+  .link-item:hover {
+    color: var(--color-gray-dark);
+  }
+</style>
