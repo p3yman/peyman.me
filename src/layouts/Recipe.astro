@@ -1,0 +1,177 @@
+---
+import { Image } from "astro:assets";
+import DefaultLayout from "./Default.astro";
+import RecipeIngredients from "../components/RecipeIngredients.astro";
+
+const { title, description, cover, servings, prepTime, cookTime, ingredients } =
+  Astro.props;
+---
+
+<DefaultLayout
+  title={title}
+  description={description}
+  image={cover?.img?.src}
+  type="article"
+>
+  <header class="recipe-header">
+    <div class="back-link">
+      <a href="/recipes" class="back-button">&larr; Back to recipes</a>
+    </div>
+    <h1 class="recipe-title">{title}</h1>
+    {
+      (prepTime || cookTime) && (
+        <div class="recipe-meta">
+          {prepTime && <span>Prep: {prepTime} min</span>}
+          {prepTime && cookTime && <span class="meta-sep">&middot;</span>}
+          {cookTime && <span>Cook: {cookTime} min</span>}
+        </div>
+      )
+    }
+  </header>
+
+  {
+    cover ? (
+      <>
+        <Image
+          src={cover.img}
+          alt={title}
+          width={720}
+          height={480}
+          class={
+            cover.credit ? "cover cover-img-with-credit" : "cover cover-img"
+          }
+        />
+        {cover.credit && (
+          <div class="cover-credit">
+            Photo by{" "}
+            <a href={cover.url} class="credit-link" target="_blank">
+              {cover.credit}
+            </a>
+          </div>
+        )}
+      </>
+    ) : (
+      <hr class="divider" />
+    )
+  }
+
+  <RecipeIngredients ingredients={ingredients} defaultServings={servings} />
+
+  <div class="recipe-instructions">
+    <h2>Instructions</h2>
+    <slot />
+  </div>
+</DefaultLayout>
+
+<style>
+  .recipe-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .back-link {
+    margin-bottom: var(--space-xl);
+  }
+
+  .back-button {
+    color: var(--color-gray-light);
+    transition: var(--transition-colors);
+  }
+
+  .back-button:hover {
+    color: var(--color-gray-dark);
+  }
+
+  .recipe-title {
+    color: var(--color-gray-dark);
+    font-size: var(--text-display-sm);
+    font-weight: 900;
+    line-height: var(--leading-snug);
+    padding-bottom: var(--space-lg);
+    font-family: var(--font-serif);
+  }
+
+  .recipe-meta {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-gray-light);
+    gap: var(--space-sm);
+  }
+
+  .cover {
+    width: 100%;
+    height: auto;
+  }
+
+  .cover-img {
+    margin-bottom: var(--space-xl);
+  }
+
+  .cover-img-with-credit {
+    margin-bottom: var(--space-sm);
+  }
+
+  .cover-credit {
+    text-align: center;
+    color: var(--color-gray-light);
+    margin-bottom: var(--space-xl);
+    font-size: var(--text-sm);
+  }
+
+  .credit-link {
+    text-decoration: underline;
+    transition: var(--transition-colors);
+  }
+
+  .credit-link:hover {
+    color: var(--color-primary);
+  }
+
+  .divider {
+    border-top: 1px solid var(--color-gray-lighter);
+    margin-bottom: var(--space-xl);
+  }
+
+  .recipe-instructions {
+    margin-top: var(--space-2xl);
+  }
+
+  .recipe-instructions h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+    color: var(--color-gray-dark);
+  }
+
+  .recipe-instructions :global(ol) {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .recipe-instructions :global(ol li) {
+    counter-increment: step;
+    position: relative;
+    padding-left: 3.5rem;
+    margin-bottom: var(--space-xl);
+    line-height: var(--leading-relaxed);
+    font-size: var(--text-lg);
+    color: var(--color-gray-dark);
+  }
+
+  .recipe-instructions :global(ol li::before) {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 4px;
+    font-size: var(--text-xl);
+    font-weight: 900;
+    font-family: var(--font-serif);
+    color: var(--color-primary);
+    width: 2.5rem;
+    text-align: center;
+    line-height: 1;
+  }
+</style>
