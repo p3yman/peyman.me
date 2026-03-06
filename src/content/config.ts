@@ -21,6 +21,35 @@ const blog = defineCollection({
     }),
 });
 
+const recipe = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/recipes" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      date: z.date(),
+      servings: z.number().default(2),
+      prepTime: z.number().optional(),
+      cookTime: z.number().optional(),
+      cover: z
+        .object({
+          img: image().optional(),
+          credit: z.string().optional(),
+          url: z.string().url().optional(),
+        })
+        .optional(),
+      ingredients: z.array(
+        z.object({
+          name: z.string(),
+          amount: z.number(),
+          unit: z.string().default(""),
+          usAmount: z.number(),
+          usUnit: z.string().default(""),
+        })
+      ),
+    }),
+});
+
 const wordOfTheDay = defineCollection({
   loader: glob({ pattern: "words.json", base: "./src/content/word-of-the-day" }),
   schema: z.record(z.string(), z.object({
@@ -31,4 +60,4 @@ const wordOfTheDay = defineCollection({
   })),
 });
 
-export const collections = { blog, wordOfTheDay };
+export const collections = { blog, recipe, wordOfTheDay };

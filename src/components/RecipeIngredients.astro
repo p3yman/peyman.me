@@ -1,0 +1,245 @@
+---
+interface Ingredient {
+  name: string;
+  amount: number;
+  unit: string;
+  usAmount: number;
+  usUnit: string;
+}
+
+interface Props {
+  ingredients: Ingredient[];
+  defaultServings: number;
+}
+
+const { ingredients, defaultServings } = Astro.props;
+const servingsOptions = [1, 2, 3, 4, 5, 6];
+---
+
+<div class="recipe-ingredients" data-default-servings={defaultServings}>
+  <h2>Ingredients</h2>
+  <div class="ingredients-controls">
+    <div class="control-group">
+      <span class="control-label">Servings</span>
+      <div class="servings-buttons">
+        {servingsOptions.map((n) => (
+          <button
+            class:list={["servings-btn", { active: n === defaultServings }]}
+            data-servings={n}
+          >
+            {n}
+          </button>
+        ))}
+      </div>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Units</span>
+      <div class="unit-buttons">
+        <button class="unit-btn active" data-unit="metric">Metric</button>
+        <button class="unit-btn" data-unit="us">US</button>
+      </div>
+    </div>
+  </div>
+  <ul class="ingredients-list">
+    {ingredients.map((ing) => (
+      <li
+        data-amount={ing.amount}
+        data-unit={ing.unit}
+        data-us-amount={ing.usAmount}
+        data-us-unit={ing.usUnit}
+      >
+        <span class="ingredient-amount">{ing.amount || ""}</span>
+        <span class="ingredient-unit">{ing.unit}</span>
+        <span class="ingredient-name">{ing.name}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  const container = document.querySelector(".recipe-ingredients") as HTMLElement;
+  if (container) {
+    const defaultServings = Number(container.dataset.defaultServings);
+    let currentServings = defaultServings;
+    let currentUnit: "metric" | "us" = "metric";
+
+    const fractionMap: [number, string][] = [
+      [0.125, "\u215B"],
+      [0.25, "\u00BC"],
+      [0.333, "\u2153"],
+      [0.5, "\u00BD"],
+      [0.667, "\u2154"],
+      [0.75, "\u00BE"],
+    ];
+
+    function formatAmount(num: number): string {
+      if (num === 0) return "";
+      const whole = Math.floor(num);
+      const decimal = num - whole;
+      const match = fractionMap.find(
+        ([key]) => Math.abs(decimal - key) < 0.05
+      );
+      if (match) {
+        return whole > 0 ? `${whole}${match[1]}` : match[1];
+      }
+      return parseFloat(num.toFixed(2)).toString();
+    }
+
+    function update() {
+      const items = container.querySelectorAll<HTMLLIElement>(
+        ".ingredients-list li"
+      );
+      const scale = currentServings / defaultServings;
+
+      items.forEach((li) => {
+        const baseAmount =
+          currentUnit === "metric"
+            ? Number(li.dataset.amount)
+            : Number(li.dataset.usAmount);
+        const unit =
+          currentUnit === "metric" ? li.dataset.unit : li.dataset.usUnit;
+        const scaled = baseAmount * scale;
+
+        const amountEl = li.querySelector(".ingredient-amount") as HTMLElement;
+        const unitEl = li.querySelector(".ingredient-unit") as HTMLElement;
+
+        amountEl.textContent = formatAmount(scaled);
+        unitEl.textContent = unit || "";
+      });
+    }
+
+    container.querySelectorAll<HTMLButtonElement>(".servings-btn").forEach(
+      (btn) => {
+        btn.addEventListener("click", () => {
+          container
+            .querySelectorAll(".servings-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentServings = Number(btn.dataset.servings);
+          update();
+        });
+      }
+    );
+
+    container.querySelectorAll<HTMLButtonElement>(".unit-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        container
+          .querySelectorAll(".unit-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentUnit = btn.dataset.unit as "metric" | "us";
+        update();
+      });
+    });
+  }
+</script>
+
+<style>
+  .recipe-ingredients {
+    border: 1px solid var(--color-gray-lighter);
+    border-radius: 0.5rem;
+    padding: var(--space-xl);
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+    color: var(--color-gray-dark);
+  }
+
+  .ingredients-controls {
+    display: flex;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .control-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .control-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-gray-light);
+    text-transform: uppercase;
+  }
+
+  .servings-buttons,
+  .unit-buttons {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--color-gray-lighter);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .servings-btn,
+  .unit-btn {
+    padding: var(--space-xs) var(--space-sm);
+    border: none;
+    background: var(--color-white);
+    color: var(--color-gray);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: var(--transition-colors);
+    border-right: 1px solid var(--color-gray-lighter);
+  }
+
+  .servings-btn:last-child,
+  .unit-btn:last-child {
+    border-right: none;
+  }
+
+  .servings-btn.active,
+  .unit-btn.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .servings-btn:hover:not(.active),
+  .unit-btn:hover:not(.active) {
+    background: var(--color-gray-lighter);
+  }
+
+  .ingredients-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ingredients-list li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
+    padding-block: var(--space-sm);
+    border-bottom: 1px solid var(--color-gray-lighter);
+    font-size: var(--text-lg);
+  }
+
+  .ingredients-list li:last-child {
+    border-bottom: none;
+  }
+
+  .ingredient-amount {
+    font-weight: 700;
+    font-family: var(--font-mono);
+    min-width: 2.5rem;
+    text-align: right;
+  }
+
+  .ingredient-unit {
+    font-family: var(--font-mono);
+    color: var(--color-gray-light);
+    min-width: 2rem;
+  }
+
+  .ingredient-name {
+    color: var(--color-gray-dark);
+  }
+</style>
