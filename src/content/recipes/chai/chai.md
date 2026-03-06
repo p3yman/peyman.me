@@ -2,6 +2,8 @@
 title: "Chai (Persian Black Tea)"
 description: "Strong brewed Persian tea served with dried bitter lemon and optional rosebud"
 date: 2026-03-06
+cover:
+  img: "./chai.webp"
 servings: 4
 prepTime: 2
 cookTime: 10

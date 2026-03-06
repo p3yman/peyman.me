@@ -2,6 +2,8 @@
 title: "Morgh ba Anaardon (Pomegranate Chicken)"
 description: "Mazandarani pomegranate chicken - tangy, rich, and slow-cooked with walnuts and pomegranate"
 date: 2026-03-06
+cover:
+  img: "./morgh.webp"
 servings: 4
 prepTime: 20
 cookTime: 90

@@ -2,6 +2,8 @@
 title: "Sharbate Zaferon (Saffron Cold Drink)"
 description: "A refreshing Persian saffron drink with rosewater, served ice cold"
 date: 2026-03-06
+cover:
+  img: "./sharbat.webp"
 servings: 4
 prepTime: 10
 cookTime: 5

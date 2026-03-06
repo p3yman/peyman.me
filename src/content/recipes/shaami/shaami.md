@@ -2,6 +2,8 @@
 title: "Shaami"
 description: "Persian potato and beef patties, crispy on the outside and flavorful on the inside - Mom's recipe"
 date: 2026-03-06
+cover:
+  img: "./shaami.webp"
 servings: 4
 prepTime: 20
 cookTime: 40

@@ -2,6 +2,8 @@
 title: "Koko Sabzi"
 description: "Persian potato and herb frittata, crispy and golden - Mom's recipe"
 date: 2026-03-06
+cover:
+  img: "./koko.jpg"
 servings: 4
 prepTime: 15
 cookTime: 25
