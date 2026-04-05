@@ -16,7 +16,7 @@
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource/merriweather": "^5.2.11",
     "@fontsource/ubuntu-mono": "^5.2.8",
-    "astro": "^5.16.5",
+    "astro": "^5.18.1",
     "astro-google-analytics": "^1.0.3",
     "astro-robots-txt": "^1.0.0",
     "clsx": "^2.1.1",
