@@ -1,5 +1,6 @@
-import { defineCollection, z } from "astro:content";
-import { categories } from "../configs/categories";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
+import { categories } from "./configs/categories";
 import { glob } from "astro/loaders";
 
 const blog = defineCollection({
@@ -14,7 +15,7 @@ const blog = defineCollection({
         .object({
           img: image().optional(),
           credit: z.string().optional(),
-          url: z.string().url().optional(),
+          url: z.url().optional(),
         })
         .optional(),
       category: z.array(z.enum(categories as [string, ...string[]])),
@@ -35,7 +36,7 @@ const recipe = defineCollection({
         .object({
           img: image().optional(),
           credit: z.string().optional(),
-          url: z.string().url().optional(),
+          url: z.url().optional(),
         })
         .optional(),
       ingredients: z.array(
