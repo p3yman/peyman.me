@@ -1,14 +1,14 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
-import robotsTxt from "astro-robots-txt";
+import { unified } from "@astrojs/markdown-remark";
 import { remarkAlert } from "remark-github-blockquote-alert";
 
-// https://astro.build/config
 export default defineConfig({
   site: "https://peyman.me",
-  integrations: [robotsTxt(), sitemap()],
+  integrations: [sitemap()],
   outDir: "./dist",
+  compressHTML: true,
   markdown: {
-    remarkPlugins: [remarkAlert],
+    processor: unified({ remarkPlugins: [remarkAlert] }),
   },
 });

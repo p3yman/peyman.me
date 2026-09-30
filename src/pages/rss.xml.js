@@ -2,7 +2,9 @@ import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 
 export async function GET(context) {
-  const blog = await getCollection("blog");
+  const blog = (await getCollection("blog")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
   return rss({
     title: "Peyman Eskandari’s Blog",
     description:
@@ -12,8 +14,8 @@ export async function GET(context) {
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,
-      tags: post.data.tags,
-      link: `/blog/${post.slug}/`,
+      categories: post.data.category,
+      link: `/blog/${post.id.split("/").pop()}/`,
     })),
     customData: `<language>en-us</language>`,
   });

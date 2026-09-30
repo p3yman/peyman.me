@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://peyman.me/sitemap-index.xml
