@@ -12,13 +12,12 @@
     "add-word": "node scripts/add-word.js"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.1",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource/merriweather": "^5.2.11",
     "@fontsource/ubuntu-mono": "^5.2.8",
-    "astro": "^6.4.8",
-    "astro-google-analytics": "^1.0.3",
-    "astro-robots-txt": "^1.0.0",
+    "astro": "^7.3.5",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.19",
     "remark-github-blockquote-alert": "^2.0.1",

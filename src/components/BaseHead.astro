@@ -1,10 +1,25 @@
 ---
-import { GoogleAnalytics } from "astro-google-analytics";
-
 const GA_ID = import.meta.env.VITE_GA_ID;
 ---
 
-<GoogleAnalytics id={GA_ID} />
+{
+  GA_ID && (
+    <>
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        is:inline></script>
+      <script is:inline define:vars={{ id: GA_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", id);
+      </script>
+    </>
+  )
+}
 <script
   data-goatcounter="https://p3yman.goatcounter.com/count"
   async
