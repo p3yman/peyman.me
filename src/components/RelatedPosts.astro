@@ -12,10 +12,7 @@ const { currentPostId, currentCategory, limit = 3 } = Astro.props;
 
 // Get all blog posts
 const allPosts = (await getCollection("blog"))
-  .filter((post) => {
-    const id = post.id.split("/").pop();
-    return id !== currentPostId;
-  })
+  .filter((post) => post.data.id !== currentPostId)
   .map((post) => {
     const id = post.id.split("/").pop();
     return {
