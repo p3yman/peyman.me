@@ -46,22 +46,20 @@ This CLI tool prompts for title and categories, then creates a markdown file in 
 
 ### Linting
 
-```bash
-# Currently no linting setup - can be added if needed
-```
+No linter is set up. Prettier with `prettier-plugin-astro` is installed for formatting.
 
 ## Architecture
 
 ### Main Project (Astro)
 
-- **Framework**: Astro 5.x with TypeScript
-- **Styling**: TailwindCSS with typography plugin
+- **Framework**: Astro 7.x with TypeScript (Node 22.12+)
+- **Styling**: Plain CSS in `/src/styles/` (global, reset, typography)
 - **Content**: File-based blog posts in `/src/content/blog/`
-- **Content Schema**: Defined in `/src/content/config.ts` using Zod
+- **Content Schema**: Defined in `/src/content.config.ts` using Zod (import `z` from `astro/zod`)
 - **Components**: Astro components in `/src/components/`
 - **Layouts**: Base layouts in `/src/layouts/`
 - **Configuration**: Categories defined in `/src/configs/categories.js`
-- **Markdown Processing**: GitHub-style alerts supported via `remark-github-blockquote-alert`
+- **Markdown Processing**: `unified()` processor from `@astrojs/markdown-remark` (Astro 7 defaults to Sätteri), with GitHub-style alerts via `remark-github-blockquote-alert`
 
 ### Content Structure
 
@@ -100,7 +98,7 @@ When creating new blog posts:
 
 ## Key Files to Understand
 
-- `/src/content/config.ts` - Content collection schema
+- `/src/content.config.ts` - Content collection schema
 - `/src/configs/categories.js` - Available blog categories  
 - `/scripts/add-page.js` - Blog post creation CLI
 - `/astro.config.mjs` - Astro configuration

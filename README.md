@@ -25,8 +25,7 @@ title: Try everything, absolutely Everything!
 description: A short description
 date: 2023-09-18
 tags: sample-tag
-cover: ./cover.jpg
-categories: ["Dev", "Note"]
+category: ["Dev", "Note"]
 ---
 
 # Enjoy writing...

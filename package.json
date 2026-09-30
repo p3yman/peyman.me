@@ -21,19 +21,18 @@
     "clsx": "^2.1.1",
     "dayjs": "^1.11.19",
     "remark-github-blockquote-alert": "^2.0.1",
-    "sharp": "^0.34.5"
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.50.0",
-    "chalk": "^5.6.2",
+    "chalk": "^6.0.1",
     "cli-welcome": "^3.0.1",
-    "eslint": "^9.39.2",
-    "eslint-plugin-astro": "^1.5.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "inquirer": "^13.1.0",
-    "nanoid": "^5.1.6",
+    "inquirer": "^14.2.2",
+    "nanoid": "^6.0.1",
     "prettier": "^3.7.4",
-    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-astro": "^1.1.0",
     "slugify": "^1.6.6"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }
