@@ -39,7 +39,7 @@ He's resting in Üsküdar cemetery, in a place Elaheh and I picked for him. I de
 
 A year after we lost him, I moved to the Netherlands. New country, new job, new life. But even now, there's only one reason I go back to Turkey: to see my best friend again.
 
-Somewhere along the way, I also stopped expecting to feel that kind of pride in my work again. Somewhere along the way I stopped expecting to feel that kind of pride in my work again. It felt like something that belonged to that time, and to working with him.
+Somewhere along the way, I also stopped expecting to feel that kind of pride in my work again. It felt like something that belonged to that time, and to working with him.
 
 ## Yesterday
 
